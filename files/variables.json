@@ -1,0 +1,11 @@
+{
+    "URL_AGENCIAS": "https://olinda.bcb.gov.br/olinda/servico/Informes_Agencias/versao/v1/odata/Agencias",
+    "URL_AGENCIAS_ADD_QUERY": "?$",
+    "URL_AGENCIAS_CONCAT": "&",
+    "URL_AGENCIAS_QUERY_TOP": "top=",
+    "URL_AGENCIAS_VALUE_TOP": "10",
+    "URL_AGENCIAS_QUERY_SKIP": "skip=0",
+    "URL_AGENCIAS_QUERY_FORMAT": "format=json",
+    "URL_AGENCIAS_QUERY_FILDERS": "select=CnpjBase,CnpjSequencial,CnpjDv,NomeIf,Segmento,CodigoCompe,NomeAgencia,Endereco,Numero,Complemento,Bairro,Cep,MunicipioIbge,Municipio,UF,DataInicio,DDD,Telefone,Posicao",
+    "AIRFLOW__CORE__SQL_ALCHEMY_CONN": "postgresql+psycopg2://airflow:airflow@postgres/airflow"
+}
