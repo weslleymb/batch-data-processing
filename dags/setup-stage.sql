@@ -101,6 +101,16 @@ $do$
 
 		ALTER TABLE public.vw_source_agency
 			OWNER TO airflow;
+
+		CREATE OR REPLACE FUNCTION try_cast(_in text, INOUT _out ANYELEMENT) AS
+		$func$
+		BEGIN
+		EXECUTE format('SELECT %L::%s', $1, pg_typeof(_out))
+		INTO  _out;
+		EXCEPTION WHEN others THEN
+		-- do nothing: _out already carries default
+		END
+		$func$  LANGUAGE plpgsql;
 		
 		CREATE OR REPLACE VIEW public.vw_source_bank
 		AS
@@ -116,15 +126,5 @@ $do$
 
 		ALTER TABLE public.vw_source_bank
 			OWNER TO airflow;
-
-		CREATE OR REPLACE FUNCTION try_cast(_in text, INOUT _out ANYELEMENT) AS
-		$func$
-		BEGIN
-		EXECUTE format('SELECT %L::%s', $1, pg_typeof(_out))
-		INTO  _out;
-		EXCEPTION WHEN others THEN
-		-- do nothing: _out already carries default
-		END
-		$func$  LANGUAGE plpgsql;
 	END;
 $do$
