@@ -1,5 +1,5 @@
 from airflow import DAG
-from utils import get_agencies, load_agencies
+from utils import get_agencies, load_agencies, load_banks
 from airflow.utils.dates import days_ago
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.operators.python import PythonOperator
@@ -53,10 +53,15 @@ with DAG(
         python_callable=load_agencies
     )
 
+    Task_IV = PythonOperator(
+        task_id="load_banks_data",
+        python_callable=load_banks
+    )
+
     Task_V = PostgresOperator(
         task_id='load_dw',
         postgres_conn_id='postgres_server',
         sql='insert-fact-manual.sql'
     )
 
-Task_I >> Task_II >> Task_III >> Task_V
+Task_I >> Task_II >> Task_III >> Task_IV >> Task_V

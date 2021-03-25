@@ -106,7 +106,7 @@ def tssplit(s, quote='"\'', delimiter=':;,', escape='/^', trim=''):
 
 def load_banks():
     gcs_hook = GCSHook(gcp_conn_id='gcp_storage_bucket')
-    blob = gcs_hook.download(object_name="ParticipantesSTRport.csv", bucket_name="airflow_bucket_banks")
+    blob = gcs_hook.download(object_name="relacao-participantes-str.csv", bucket_name="airflow_bucket_banks")
     str_file = blob.decode("utf-8").splitlines()
     insert_question_query = """
         INSERT INTO public.bank (
